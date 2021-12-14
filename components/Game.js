@@ -67,16 +67,21 @@ const Game = ({randomNumberCount, initialSeconds}) => {
     // const status = gameStatus()
     return (
         <View>
-            <Text style={[styles.target, styles[gameStatus.toLocaleLowerCase()]]}>{target}</Text>
+            <Text style={[styles.target, styles[gameStatus]]}>{target}</Text>
             <Text>{gameStatus}</Text>
             <Text>{remainingSeconds}</Text>
+            <Text>{target}</Text>
             <View style={styles.randomContainer}>
                 {randomNumber.map((number, index) => (
                     <RandomNumber key={index} id={index} number={number} isSelected={isNumberSelected(index) || gameStatus !== 'PLAYING'} onSelected={selectNumber}/>
                 ))}
             </View>
             {
-                gameOver &&  <TouchableOpacity onPress={handleReset} style={styles.restart}>Play Again</TouchableOpacity>
+                gameOver &&  (
+                    <TouchableOpacity onPress={handleReset} style={styles.restart}>
+                        <Text>Play Again</Text>
+                    </TouchableOpacity>
+                )
             }
            
         </View>
@@ -95,30 +100,21 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between'
     },
-    playing: {
+    PLAYING: {
         backgroundColor: '#bbb'
     },
-    won: {
+    WON: {
         backgroundColor: 'green',
-        color: 'white'
     },
-    lost: {
+    LOST: {
         backgroundColor: 'red'
     },
     restart: {
-        width: '100%',
-        paddingVertical: 20,
-        fontSize: 14,
-        backgroundColor: '#c4c4c4',
-        fontWeight: 'bold',
         textAlign: 'center',
-        marginTop: 10,
-        fontFamily: 'arial',
-        borderRadius: 5,
-        textTransform: 'uppercase',
-        borderColor: '#000',
-        borderWidth: 3,
-        borderStyle: 'solid'
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+        backgroundColor: '#aaa',
+        color: '#fff'
     }
 });
 
